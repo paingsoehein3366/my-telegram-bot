@@ -1,16 +1,36 @@
+require("dotenv").config();
 const { Telegraf } = require('telegraf');
+const Token = process.env.My_Token || "";
+console.log("Token: ", Token);
 
 // Initialize your bot with the token provided by BotFather
-const bot = new Telegraf('6531915487:AAHiPTAfly3Fm3aC6nPiVCfdAn2xjp5Jzjg');
+const bot = new Telegraf(`${Token}`);
 
 // Start command handler
-bot.start((ctx) => ctx.reply('Welcome to your Telegram Bot!'));
+bot.start((ctx) => ctx.reply('Welcome to my Telegram Bot! /help'));
+
+function myancare() {
+      const text = "MyanCare function";
+      return text;
+};
+function department() {
+      const text = "Department function";
+      return text;
+}
 
 // Help command handler
-bot.help((ctx) => ctx.reply('Send me a message and I will echo it back to you.'));
+bot.help((ctx) => {
+      console.log("help: ", ctx.chat);
+      ctx.reply('/MyanCare \n/Department \n/TechTeam');
+});
 
 // Echo message handler
-bot.on('message', (ctx) => ctx.reply(ctx.message.text));
+bot.on('message', (ctx) => {
+      console.log("message: ");
+      if (ctx.text === '/MyanCare') return ctx.reply(myancare());
+      if (ctx.text === '/Department') return ctx.reply(department())
+      ctx.reply(ctx.message.text);
+});
 
 // Start polling for updates
 bot.launch().then(() => {
