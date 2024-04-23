@@ -15,6 +15,11 @@ function myancare() {
 function department() {
       const text = "Department function";
       return text;
+};
+//check users
+function checkUsers(user)  {
+      const userInfor = user.chat;
+      console.log("user: ",userInfor);
 }
 
 // Help command handler
@@ -24,6 +29,7 @@ bot.help((ctx) => {
 
 // Echo message handler
 bot.on('message', (ctx) => {
+      checkUsers(ctx)
       if (ctx.text === '/MyanCare') return ctx.reply(myancare());
       if (ctx.text === '/Department') return ctx.reply(department())
       ctx.reply(ctx.message.text);
