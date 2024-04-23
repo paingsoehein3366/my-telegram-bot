@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { Telegraf } = require('telegraf');
 const Token = process.env.My_Token || "";
-console.log("Token: ", Token);
 
 // Initialize your bot with the token provided by BotFather
 const bot = new Telegraf(`${Token}`);
@@ -20,13 +19,11 @@ function department() {
 
 // Help command handler
 bot.help((ctx) => {
-      console.log("help: ", ctx.chat);
       ctx.reply('/MyanCare \n/Department \n/TechTeam');
 });
 
 // Echo message handler
 bot.on('message', (ctx) => {
-      console.log("message: ");
       if (ctx.text === '/MyanCare') return ctx.reply(myancare());
       if (ctx.text === '/Department') return ctx.reply(department())
       ctx.reply(ctx.message.text);
